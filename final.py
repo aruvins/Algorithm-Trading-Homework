@@ -1,3 +1,6 @@
+# source venv/bin/activate
+# streamlit run final.py
+
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
@@ -164,27 +167,38 @@ st.set_page_config(
 st.title("📊 Algo TCA Calculator")
 st.caption("Pre-Trade & Post-Trade Transaction Cost Analysis")
 
-tab_pre, tab_post = st.tabs(["🔵 Pre-Trade", "🟢 Post-Trade"])
+tab_pre, tab_post = st.tabs(["🔵 Pre-Trade (HW 7 & 8)", "🟢 Post-Trade (HW 6)"])
 
+# ─────────────────────────────────────────────
+# Sidebar: Model Parameters
+# ─────────────────────────────────────────────
+st.sidebar.header("⚙️ Model Parameters")
+st.sidebar.caption("Non-linear regression coefficients")
+
+a1 = st.sidebar.number_input("a1 (Scale)", value=883.58722, format="%.5f")
+a2 = st.sidebar.number_input("a2 (Size Exponent)", value=0.35408, format="%.5f")
+a3 = st.sidebar.number_input("a3 (Vol Exponent)", value=0.755684, format="%.5f")
+a4 = st.sidebar.number_input("a4 (POV Exponent)", value=0.826155, format="%.5f")
+b1 = st.sidebar.number_input("b1 (Weight)", value=0.963532, format="%.5f")
 
 # ══════════════════════════════════════════════
 # PRE-TRADE TAB
 # ══════════════════════════════════════════════
 with tab_pre:
-    pre_section = st.sidebar.radio(
-        "Pre-Trade Section",
-        [
-            "MI / TR / PA",
-            "Expected Cost & Price",
-            "Trader's Dilemma",
-            "Cost Distribution (PDF)",
-            "Cumulative Distribution (CDF)",
-            "Price Improvement",
-            "Efficient Frontier",
-            "MI Constraint",
-        ],
-        key="pre_section",
-    ) if st.session_state.get("active_tab", "pre") == "pre" else None
+    # pre_section = st.sidebar.radio(
+    #     "Pre-Trade Section",
+    #     [
+    #         "MI / TR / PA",
+    #         "Expected Cost & Price",
+    #         "Trader's Dilemma",
+    #         "Cost Distribution (PDF)",
+    #         "Cumulative Distribution (CDF)",
+    #         "Price Improvement",
+    #         "Efficient Frontier",
+    #         "MI Constraint",
+    #     ],
+    #     key="pre_section",
+    # ) if st.session_state.get("active_tab", "pre") == "pre" else None
 
     # ── Store active tab ──
     col_tabs = st.columns(2)
